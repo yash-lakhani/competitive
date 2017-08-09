@@ -1,0 +1,71 @@
+Given two strings ‘str1’ and ‘str2’ of size m and n respectively. The task is to remove/delete and insert minimum number of characters from/in str1 so as to transform it into str2. It could be possible that the same character needs to be removed/deleted from one point of str1 and inserted to some another point.
+
+Input:
+
+The first line of input contains an integer T denoting the number of test cases. Then T test cases follow. The first line of each test case contains integers N and M denoting the length of the strings str1 and str2. Both the strings consist of only small letter alphabets.
+
+The second line of each test case contains the strings str1 and str2.
+
+
+Output:
+
+Print the total no of insertions and deletions to be done to convert str1 to str2. Output the answer in a new line.
+
+
+Constraints:
+
+1<= T <=100
+
+1<= N, M <=1000
+
+
+Example:
+
+Input:
+
+1
+
+4 3
+
+heap pea 
+
+Output:
+
+3
+
+#include<iostream>
+using namespace std;
+
+int count(string str1, string str2, int m, int n){
+    int dp[m+1][n+1];
+    for(int i=0;i<=m;i++){
+        for(int j=0;j<=n;j++){
+            if(i==0){
+                dp[i][j] = j;
+            }
+            else if(j==0){
+                dp[i][j] = i;
+            }
+            else if(str1[i-1] == str2[j-1]){
+                dp[i][j] = dp[i-1][j-1];
+            }
+            else{
+                dp[i][j] = 1 + min(dp[i][j-1],dp[i-1][j]);
+            }
+        }
+    }
+    return dp[m][n];
+}
+
+int main() {
+	int T;
+	cin>>T;
+	for(int i=0;i<T;i++){
+	    int m,n;
+	    cin>>n>>m;
+	    string str1,str2;
+	    cin>>str1>>str2;
+	    cout<<count(str1,str2,n,m)<<endl;
+	}
+	return 0;
+}
