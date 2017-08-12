@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int T;
+    cin>>T;
+    for(int i=0;i<T;i++){
+        string S;
+        cin>>S;
+        int l = S.length();
+        for(int j=0;j<l;j++){
+            if(S[j] != S[l-1-j]){
+                cout<<"NO"<<endl;
+                goto stop;
+            }
+        }
+        
+        cout<<"YES ";
+        if(l%2 == 0){
+            cout<<"EVEN"<<endl;
+        }
+        else{
+            cout<<"ODD"<<endl;
+        }
+        stop:;
+    }
+    return 0;
+}
